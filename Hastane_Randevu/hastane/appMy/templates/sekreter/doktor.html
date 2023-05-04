@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+   <div class="container-fluid p-0 doktorBilgi">
+    <div class="row doktorBilgileri">
+       <div class="col-4">
+        <form method="POST">
+            {% csrf_token %}
+            <h2 class="hastagirisisim mb-3">Doktor Kayıt Paneli</h2>
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="text" name="name" id="form2Example1" class="form-control" />
+                <label class="form-label" for="form2Example1">Ad</label>
+              </div>
+            
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="text" name="surname" id="form2Example1" class="form-control" />
+                <label class="form-label" for="form2Example1">Soyad</label>
+              </div>
+            
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="text" name="tcno" id="form2Example1" class="form-control" />
+                <label class="form-label" for="form2Example1">TC</label>
+              </div>
+            
+              <div class="form-outline mb-4">
+                   <select  class="form-select"  name="bransll" id=""  aria-label="Default select example">
+                   <option value="">Branş Seçiniz</option>
+                   
+                   {% for i in branslar %}
+                      <option value="{{ i.id }}">{{ i.ad }}</option>
+                   {% endfor %}
+
+                  </select>
+              </div>
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="password" name="password" id="form2Example1" class="form-control" />
+                <label class="form-label" for="form2Example1">Şifre</label>
+              </div>
+
+              
+              <!-- Submit button -->
+              <button type="submit" name="button" value="buttonkayit" class="btn btn-primary btn-block mb-2">Doktor Ekle</button>
+            </form>
+            <!-- Doktor Bilgileri Düzenle -->
+            <button type="submit" class="btn btn-primary btn-block mb-2" style=" display:block; margin:auto;" data-mdb-toggle="modal" data-mdb-target="#exampleModalDoktorBilgi">Doktor Bilgileri Düzenle</button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalDoktorBilgi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <form method="POST" class="modal-content">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Profil Ayarla</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label mb-0 p-0 d-block text-start">ID</label>
+                        <input type="text" name="doktorid" class="form-control"/>
+                        <label class="form-label mb-0 p-0 d-block text-start">Ad</label>
+                        <input type="text" name="name" class="form-control"/>
+                        <label class="form-label mb-0 p-0 d-block text-start">Soyad</label>
+                        <input type="text" name="surname" class="form-control"/>
+                        <label class="form-label mb-0 p-0 d-block text-start">TC Kimlik No</label>
+                        <input type="number" name="tcno" class="form-control"/>
+                        <div class="form-outline">
+                            <label class="form-label mb-0 p-0">Branş</label>
+                            <select  class="form-select"  name="bransguncel" id=""  aria-label="Default select example">
+                             <option value="">Branş Seçiniz</option>
+                             
+                             {% for i in branslar %}
+                             <option value="{{ i.id }}">{{ i }}</option>    
+                             {% endfor %}
+
+                            </select>
+                        </div>
+                        <label class="form-label mb-0 p-0 d-block text-start">Şifre</label>
+                        <input type="password" name="password" class="form-control"/>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="submit" name="button" value="buttonDoktorGuncelle" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-block mb-2"  data-mdb-toggle="modal" data-mdb-target="#exampleModalSil">Doktor Kaydı Sil</button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalSil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <form method="POST" class="modal-content">
+                {% csrf_token %}
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Doktor Sil</h5>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <label class="form-label mb-0 p-0 d-block text-start">Silmek İstediğiniz Doktorun ID Giriniz</label>
+                  <input type="text" name="doktorid" class="form-control"/>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                  <button type="submit"  name="button" value="buttonDoktorSil" class="btn btn-primary">Sil</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <a href="{% url 'secreterDetay' %}" class="btn btn-primary btn-block mb-2">Çıkış Yap</a>
+        </div>
+       <div class="col-8">
+       <h3>Doktorlar</h3>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Doktor ID</th>
+                            <th>Doktor Ad</th>
+                            <th>Doktor Soyad</th>
+                            <th>Doktor Branş</th>
+                            <th>Doktor TC</th>
+                            <th>Doktor Şifre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      
+                          
+                          {% for i in doktorlar %}
+                          <tr>
+                          <td>{{ i.id }}</td>
+                          <td>{{ i.isim }}</td>
+                          <td>{{ i.soyad }}</td>
+                          <td>{{ i.doktorBrans }}</td>
+                          <td>{{ i.doktorTC }}</td>
+                          <td>{{ i.password }}</td>
+                          </tr> 
+                          {% endfor %}
+                            
+                            
+                        
+                        <!-- <tr class="active-row">
+                            <td>Melissa</td>
+                            <td>5150</td>
+                        </tr> -->
+                        <!-- and so on... -->
+                    </tbody>
+                </table>
+       </div>
+    </div>
+   </div>
+{% endblock body %}
+    

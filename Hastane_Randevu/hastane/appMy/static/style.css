@@ -1,0 +1,127 @@
+*{
+    box-sizing: border-box !important;
+}
+
+.girisler{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(7, 192, 217);
+    padding: 0;
+    margin: 0;
+    
+}
+.hasta{
+    text-align: center;
+    border: 2px solid black;
+    margin: 20px;
+}
+
+/* hasta start */
+.hastagirsrenk{
+
+    background-color: rgb(226, 226, 235);
+}
+.hastagiris{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    font-family:cursive;
+}
+.hastagirisisim{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.kbilgi{
+    border: 2px solid white;
+    height: 450px;
+    background-color: #80d4c3;
+}
+.kbilgii{
+    border: 2px solid white;
+    height: 450px;
+    background-color: #80d4c3;
+
+}
+.kbilgiii{
+    height: 250px;
+    border: 2px solid white;
+    background-color: #b0e8dd;
+}
+.randevuOlustur{
+    overflow-y: scroll;
+}
+.hastabilgi{
+    margin-top: 70px;
+    text-align: center;
+    
+}
+.tchasta{
+    margin-left: 23px;
+}
+
+
+.hizlierisim a{
+    display: block;
+    margin: auto;
+    width: 300px !important;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    margin-right: 5px !important;
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 10px 15px;
+}
+.kbilgiipanel{
+    background-color: bisque;
+}
+.hastaranpanel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+textarea{
+    min-height: 100px;
+    max-height: 100px;
+}
+/* hasta end */
+
+/* secreter start */
+.doktorBilgi{
+    height: 100vh;
+    overflow: hidden !important;
+    background-color: #b0e8dd;
+}
+.doktorBilgileri{
+    margin-top: 100px !important;
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+    
+}
+.doktorlarListesi{
+    overflow-y: scroll !important;
+    overflow-x: hidden;
+}
+.secreterYuk{
+    height: 600px !important;
+}
+.bransBilgi{
+    margin-left: 200px;
+}
+/* secreter end */

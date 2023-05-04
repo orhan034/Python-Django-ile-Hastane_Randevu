@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <div class="girisler">
+            <div class="hasta">
+                <a href="{% url 'hastaLogin' %}">
+                    <img src="{% static 'img/hasta.jpg' %}" alt="resim">
+                </a>
+                <h2 class="mt-2">Hasta Giriş</h2>
+            </div>
+            
+            <div class="hasta">
+                <a href="{% url 'secreterLogin' %}">
+                    <img src="{% static 'img/sekreter.png' %}" alt="resim">
+                </a>
+                <h2 class="mt-2">Sekreter Giriş</h2>
+            </div>
+            <div class="hasta">
+                <a href="{% url 'loginDoktor' %}">
+                    <img src="{% static 'img/doctor.png' %}" alt="resim">
+                </a>
+                <h2 class="mt-2">Doktor Giriş</h2>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    

@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-4 kbilgi">
+                <h3>Kişi Bilgileri</h3>
+                <div class="hastabilgi">
+                    <h5 class="tchasta">Kişi TC: <span>{{ hastauserinfo.hastaTC }}</span></h5>
+                    <h5>Kişi Ad Soyad: <span>{{ request.user.get_full_name }}</span></h5>
+                    <!-- Button trigger modal -->
+                    <button type="submit" class="btn btn-primary btn-block mb-2" style="width:200px; display:block; margin:auto;" data-mdb-toggle="modal" data-mdb-target="#exampleModalBilgi">Bilgilerini Düzenle</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalBilgi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <form method="POST" class="modal-content">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Profil Ayarla</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <label class="form-label mb-0 p-0 d-block text-start">Ad</label>
+                                <input type="text" name="name" value="{{ hastauserinfo.isim }}" class="form-control"/>
+                                <label class="form-label mb-0 p-0 d-block text-start">Soyad</label>
+                                <input type="text" name="surname" value="{{ hastauserinfo.soyad }}" class="form-control"/>
+                                <label class="form-label mb-0 p-0 d-block text-start">TC Kimlik No</label>
+                                <input type="number" name="tcno" value="{{ hastauserinfo.hastaTC }}" class="form-control"/>
+                                <label class="form-label mb-0 p-0 d-block text-start">Kullanıcı Adı</label>
+                                <input type="text" name="username" value="{{ user.username }}" class="form-control"/>
+                                <label class="form-label mb-0 p-0 d-block text-start">Telefon Numarası</label>
+                                <input type="text" name="phone" value="{{ hastauserinfo.hastaTelefon }}" class="form-control"/>
+                                <div class="form-outline mb-2 mt-2">
+                                    <select  class="form-select"  name="cinsiyet" id=""  aria-label="Default select example">
+                                    <option value="">Cinsiyet Seçiniz</option>
+                                    <option value="erkek">Erkek</option>
+                                    <option value="kadin">Kadın</option>
+                                </select>
+                                </div>
+                                <label class="form-label mb-0 p-0 d-block text-start">Şifre</label>
+                                <input type="password" name="password" class="form-control"/>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                            <button type="submit" name="button" value="buttonProfil" class="btn btn-primary">Kaydet</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <!-- Button trigger modal -->
+                    <button type="submit" class="btn btn-primary btn-block mb-2" style="width:200px; display:block; margin:auto;" data-mdb-toggle="modal" data-mdb-target="#exampleModalSifre">Şifre Değiştir</button>
+             
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalSifre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form method="POST" class="modal-content">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Şifre Değiştir</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div   class="modal-body">
+                            
+                            <label class="form-label mb-0 p-0 d-block text-start">Şifre</label>
+                            <input type="password" name="password" class="form-control"/>
+                            <label class="form-label mb-0 p-0 d-block text-start">Yeni Şifre</label>
+                            <input type="password" name="password1" class="form-control"/>
+                            <label class="form-label mb-0 p-0 d-block text-start">Şifre Tekrar</label>
+                            <input type="password" name="password2" class="form-control"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                            <button type="submit" name="button" value="buttonSifre" class="btn btn-primary">Kaydet</button>
+                        </div>
+                        </form>
+                    </div>
+                    </div>
+                    <a href="{% url 'logouthastaUser' %}" type="submit" class="btn btn-danger btn-block mb-4" style="width:200px; display:block; margin:auto;">Çıkış Yap</a>
+                </div>
+            </div>
+            <div class="col-8 kbilgi">
+                <h3>Randevu Geçmişi</h3>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Randevu id</th>
+                            <th>Randevu Tarih</th>
+                            <th>Randevu Saat</th>
+                            <th>Randevu Branş</th>
+                            <th>Randevu Doktor</th>
+                            <th>Randevu Durum</th>
+                            <th>TC</th>
+                            <th>Şikayet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dom</td>
+                            <td>6000</td>
+                        </tr>
+                        <tr class="active-row">
+                            <td>Melissa</td>
+                            <td>5150</td>
+                        </tr>
+                        <!-- and so on... -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 kbilgii">
+                <h3>Randevu Paneli</h3>
+                <div class="hastaranpanel">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <!-- Email input -->
+                        <!-- <div class="form-outline mb-4">
+                            <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1">Email address</label>
+                        </div> -->
+                        <!-- <label class="form-label mb-0 p-0">İd</label>
+                        <input type="number" name="randevuid" class="form-control" /> -->
+                        <div class="form-outline">
+                            <label class="form-label mb-0 p-0">Branş</label>
+                            <select  class="form-select"  name="brans" id="">
+                             <option value="">Branş Seçiniz</option>
+                             
+                             {% for i in branslar %}
+                             <option selected value="{{ i.slug }}">{{ i }}</option>
+                             {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="form-outline mb-2">
+                            <label class="form-label mb-0 p-0">Doktor</label>
+                            <select  class="form-select"  name="doktor" id="">
+                             <option value="">Doktor Seçiniz</option>
+                             
+                             {% for i in doktorlar %}
+                             <option value="{{ i.slug }}">{{ i }}</option>
+                             {% endfor %}
+                                
+                           
+                            </select>
+                        </div>
+                        
+                        <textarea name="text" id="" cols="40" rows="3">Şikayetiniz...</textarea>
+                        <button type="submit" name="button" value="randebuAl" class="btn btn-primary btn-block mt-1" style=" display:block;">Randevu Al</button>
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="col-8 kbilgii">
+                <h3>Aktif Randevular</h3>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Randevu id</th>
+                            <th>Randevu Tarih</th>
+                            <th>Randevu Saat</th>
+                            <th>Randevu Branş</th>
+                            <th>Randevu Doktor</th>
+                            <th>Randevu Durum</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for i in randevu %}
+                         <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.randevuTarih }}</td>
+                            <td>{{ i.randevuSaat }}</td>
+                            <td>{{ i.randevuBrans }}</td>
+                            <td>{{ i.randevuDoktor }}</td>
+                            <td>{{ i.randevuDurum }}</td>
+                         </tr> 
+                        {% endfor %}
+                            
+                       
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    
